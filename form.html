@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEQAT AL-KAFAA | معرض الصور</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&family=Tajawal:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link id="language-style" rel="stylesheet" href="style-en.css" />
+    <style>
+      /* Form Section Styles */
+      .form-section {
+        margin-top: 3rem;
+        padding: 4rem 0;
+        background-color: #f9f9f9;
+        direction: ltr; /* Ensure form direction is LTR even in RTL languages */
+      }
+
+      .form-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-section h2 {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .form-section form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-section label {
+        font-weight: 600;
+        color: #34495e;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      .form-section input[type="text"],
+      .form-section input[type="tel"],
+      .form-section input[type="email"],
+      .form-section select,
+      .form-section textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-section input[type="text"]:focus,
+      .form-section input[type="tel"]:focus,
+      .form-section input[type="email"]:focus,
+      .form-section select:focus,
+      .form-section textarea:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      }
+
+      .form-section select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+      }
+
+      /* Multiple select styling */
+      .form-section select[multiple] {
+        height: auto;
+        min-height: 150px;
+        padding: 8px;
+      }
+
+      .form-section select[multiple] option {
+        padding: 8px 12px;
+        margin: 2px 0;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+
+      .form-section select[multiple] option:hover {
+        background-color: #e3f2fd;
+      }
+
+      /* Radio and Checkbox Groups */
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .radio-option,
+      .checkbox-option {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .radio-option input[type="radio"],
+      .checkbox-option input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: #3498db;
+      }
+
+      .radio-option label,
+      .checkbox-option label {
+        font-weight: 500;
+        margin-bottom: 0;
+        cursor: pointer;
+      }
+
+      /* Other frequency input */
+      .radio-option input[type="text"] {
+        flex: 1;
+        max-width: 200px;
+        margin-left: 10px;
+      }
+
+      /* Submit Button */
+      .form-section button[type="submit"] {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-top: 1rem;
+      }
+
+      .form-section button[type="submit"]:hover {
+        background-color: #2980b9;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 1.5rem;
+        }
+
+        .form-section h2 {
+          font-size: 1.5rem;
+        }
+
+        .radio-group,
+        .checkbox-group {
+          gap: 0.75rem;
+        }
+
+        .radio-option input[type="text"] {
+          max-width: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-container {
+          padding: 1rem;
+        }
+
+        .form-section {
+          padding: 2rem 0;
+        }
+
+        .radio-option input[type="text"] {
+          max-width: 120px;
+        }
+      }
+
+      /* RTL Support */
+      [dir="rtl"] .form-section {
+        direction: rtl;
+      }
+
+      [dir="rtl"] .form-section select {
+        background-position: left 1rem center;
+        padding-right: 15px;
+        padding-left: 2.5rem;
+      }
+
+      [dir="rtl"] .radio-option input[type="text"] {
+        margin-left: 0;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Animation -->
+    <div class="loader">
+      <div class="loader-inner">
+        <div class="loader-circle"></div>
+        <div class="loader-text">DEQAT AL-KAFAA</div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="DEQAT AL-KAFAA Logo" />
+        </a>
+
+        <ul class="nav-menu">
+          <li>
+            <a href="index.html#home" class="nav-link" data-translate="home"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a href="index.html#about" class="nav-link" data-translate="about"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#services"
+              class="nav-link"
+              data-translate="services"
+              >Services</a
+            >
+          </li>
+          <li>
+            <a href="pic.html" class="nav-link active" data-translate="images"
+              >images</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#process"
+              class="nav-link"
+              data-translate="process"
+              >Process</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#accreditation"
+              class="nav-link"
+              data-translate="accreditation"
+              >Accreditation</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html#contact"
+              class="nav-link"
+              data-translate="contact"
+              >Contact</a
+            >
+          </li>
+          <li>
+            <a href="form.html" class="nav-link" data-translate="reservation"
+              >Reservation</a
+            >
+          </li>
+        </ul>
+        <div class="lang-switcher">
+          <button onclick="setLanguage('en')" data-translate="english">
+            English
+          </button>
+          <button onclick="setLanguage('ar')" data-translate="arabic">
+            عربي
+          </button>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Form Section -->
+    <section class="form-section">
+      <div class="form-container">
+        <form id="testForm" method="POST" action="submit.php">
+          <h2 data-translate="Proficiency Test Questionnaire">
+            Proficiency Test Questionnaire
+          </h2>
+
+          <label data-translate="Company Name: *">Company Name: *</label>
+          <input type="text" name="company_name" required />
+
+          <label data-translate="Address: *">Address: *</label>
+          <input type="text" name="address" required />
+
+          <label data-translate="Phone: *">Phone: *</label>
+          <input type="tel" name="phone" required />
+
+          <label data-translate="Email Address: *">Email Address: *</label>
+          <input type="email" name="email" required />
+
+          <label data-translate="Contact Name: *">Contact Name: *</label>
+          <input type="text" name="contact_name" required />
+
+          <label
+            data-translate="1. Which type of proficiency test schemes do you need?"
+          >
+            1. Which type of proficiency test schemes do you need?
+          </label>
+
+          <div
+            style="
+              max-height: 300px;
+              overflow-y: auto;
+              border: 1px solid #ccc;
+              padding: 10px;
+            "
+          >
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Temperature Sensor with Indicator"
+              />
+              Calibration of Temperature Sensor with Indicator</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Data Logger (Temperature & Relative Humidity)"
+              />
+              Calibration of Data Logger (Temperature & Relative
+              Humidity)</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Temperature & Humidity Enclosure"
+              />
+              Calibration of Temperature & Humidity Enclosure</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Temperature Enclosure"
+              />
+              Calibration of Temperature Enclosure</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Dry block Calibrators"
+              />
+              Calibration of Dry block Calibrators</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Temperature Indicator"
+              />
+              Calibration of Temperature Indicator</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Infra-red Thermometer"
+              />
+              Calibration of Infra-red Thermometer</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Digital Balances"
+              />
+              Calibration of Digital Balances</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Masses"
+              />
+              Calibration of Masses</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Piston Operated Micropipettes"
+              />
+              Calibration of Piston Operated Micropipettes</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Pressure Gauges"
+              />
+              Calibration of Pressure Gauges</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Vacuum Pressure Gauges"
+              />
+              Calibration of Vacuum Pressure Gauges</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Timers & Stop Watches"
+              />
+              Calibration of Timers & Stop Watches</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Rotational Speed Devices"
+              />
+              Calibration of Rotational Speed Devices</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration od Digital Caliber"
+              />
+              Calibration od Digital Caliber</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of Digital Multimeter"
+              />
+              Calibration of Digital Multimeter</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Calibration of pH meters"
+              />
+              Calibration of pH meters</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Testing of Ethanol"
+              />
+              Testing of Ethanol</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Testing of Isopropyl Alcohol"
+              />
+              Testing of Isopropyl Alcohol</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Testing of Aceton"
+              />
+              Testing of Aceton</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Testing of Methylparaben"
+              />
+              Testing of Methylparaben</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Determination of pH"
+              />
+              Determination of pH</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Determination of Total Aerobic Count"
+              />
+              Determination of Total Aerobic Count</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Determination of E. coli"
+              />
+              Determination of E. coli</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Determination of Coagulase Positive Staphylococci"
+              />
+              Determination of Coagulase Positive Staphylococci</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Detection of Salmonella Spp."
+              />
+              Detection of Salmonella Spp.</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Liquid Limit, Plastic Limit, and Plasticity Index of Soils"
+              />
+              Liquid Limit, Plastic Limit, and Plasticity Index of Soils</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Laboratory Compaction Characteristics of Soil Using Modified Effort"
+              />
+              Laboratory Compaction Characteristics of Soil Using Modified
+              Effort</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Compressive Strength of Cylindrical Concrete Specimens"
+              />
+              Compressive Strength of Cylindrical Concrete Specimens</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Relative Density (Specific gravity) and absorption of fine aggregate"
+              />
+              Relative Density (Specific gravity) and absorption of fine
+              aggregate</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Sieve analysis of Fine and Coarse Aggregates"
+              />
+              Sieve analysis of Fine and Coarse Aggregates</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Materials finer than 75-µm (No. 200) Sieve in Mineral Aggregates by Washing"
+              />
+              Materials finer than 75-µm (No. 200) Sieve in Mineral Aggregates
+              by Washing</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Resistance to Degradation of Small-size Coarse aggregate by Abrasion and Impact in the Los Angeles Machine"
+              />
+              Resistance to Degradation of Small-size Coarse aggregate by
+              Abrasion and Impact in the Los Angeles Machine</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Sand Equivalent Value of Soils and Fine Aggregate"
+              />
+              Sand Equivalent Value of Soils and Fine Aggregate</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Relative Density (Specific gravity) and absorption of Coarse aggregate"
+              />
+              Relative Density (Specific gravity) and absorption of Coarse
+              aggregate</label
+            ><br />
+            <label
+              ><input
+                type="checkbox"
+                name="test_type[]"
+                value="Theoretical Maximum Specific Gravity and Density of Bituminous Paving Mixture"
+              />
+              Theoretical Maximum Specific Gravity and Density of Bituminous
+              Paving Mixture</label
+            ><br />
+
+            <!-- Other -->
+            <label>
+              <input
+                type="checkbox"
+                id="other_checkbox"
+                onchange="toggleOtherInput()"
+                name="test_type[]"
+                value="Other"
+              />
+              Other </label
+            ><br />
+
+            <div
+              id="other_input_wrapper"
+              style="display: none; margin-top: 10px"
+            >
+              <label for="other_test">Please specify:</label>
+              <input
+                type="text"
+                name="other_test"
+                id="other_test"
+                placeholder="Enter your test type here..."
+              />
+            </div>
+          </div>
+
+          <label
+            data-translate="2. How frequently would you intend to participate?"
+            >2. How frequently would you intend to participate?</label
+          >
+          <div class="radio-group">
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="once"
+                name="frequency"
+                value="Once a year"
+              />
+              <label for="once" data-translate="Once a year">Once a year</label>
+            </div>
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="twice"
+                name="frequency"
+                value="Twice a year"
+              />
+              <label for="twice" data-translate="Twice a year"
+                >Twice a year</label
+              >
+            </div>
+            <div class="radio-option">
+              <input type="radio" id="other" name="frequency" value="Other" />
+              <label for="other" data-translate="Other">Other</label>
+              <input
+                type="text"
+                name="other_frequency"
+                style="width: auto; display: inline-block; margin-left: 10px"
+              />
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-option">
+              <input type="checkbox" id="not_robot" name="not_robot" required />
+              <label for="not_robot" data-translate="I am not a robot"
+                >I am not a robot</label
+              >
+            </div>
+          </div>
+
+          <button type="submit" data-translate="Submit">Submit</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              style="width: 8rem; height: 6rem"
+              src="images/logo-preview.png"
+              alt="DEQAT AL-KAFAA"
+              data-translate="DEQAT AL-KAFAA"
+            />
+            <p data-translate="Testing Quality. Trusting Results.">
+              Testing Quality. Trusting Results.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h3 data-translate="Quick Links">Quick Links</h3>
+            <ul>
+              <li><a href="index.html#home" data-translate="Home">Home</a></li>
+              <li>
+                <a href="index.html#about" data-translate="About Us"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Services"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a href="index.html#process" data-translate="PT Process"
+                  >PT Process</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#accreditation"
+                  data-translate="Accreditation"
+                  >Accreditation</a
+                >
+              </li>
+              <li>
+                <a href="index.html#contact" data-translate="Contact"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-services">
+            <h3 data-translate="Our Services">Our Services</h3>
+            <ul>
+              <li>
+                <a
+                  href="index.html#services"
+                  data-translate="Civil Engineering Testing"
+                  >Civil Engineering Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Food Testing"
+                  >Food Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Cosmetics Testing"
+                  >Cosmetics Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Water Testing"
+                  >Water Testing</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#services"
+                  data-translate="Calibration Services"
+                  >Calibration Services</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h3 data-translate="Contact Info">Contact Info</h3>
+            <ul>
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <span data-translate="Riyadh, K.S.A">Riyadh, K.S.A</span>
+              </li>
+              <li>
+                <i class="fas fa-phone-alt"></i>
+                <span data-translate="+966 535 935 824">+966 535 935 824</span>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <span data-translate="info@deqat-pt.com"
+                  >info@deqat-pt.com</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <a href="https://softcodedevelop.com/" target="_blank">
+            <p data-translate="© 2025 Made by SoftCode. All Rights Reserved.">
+              &copy; 2025 Made by
+              <span style="color: #ff00cf; font-size: large"
+                ><b>SoftCode</b></span
+              >. All Rights Reserved.
+            </p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      function toggleOtherInput() {
+        const checkbox = document.getElementById("other_checkbox");
+        const inputWrapper = document.getElementById("other_input_wrapper");
+        inputWrapper.style.display = checkbox.checked ? "block" : "none";
+      }
+    </script>
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        // Toggle menu when clicking on the hamburger icon
+        menuToggle.addEventListener("click", function () {
+          this.classList.toggle("active");
+          navMenu.classList.toggle("active");
+          document.body.classList.toggle("no-scroll");
+        });
+
+        // Close menu when clicking on a nav link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            if (window.innerWidth <= 768) {
+              menuToggle.classList.remove("active");
+              navMenu.classList.remove("active");
+              document.body.classList.remove("no-scroll");
+            }
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!navMenu.contains(e.target)) {
+            if (e.target !== menuToggle && !menuToggle.contains(e.target)) {
+              menuToggle.classList.remove("active");
+              navMenu.classList.remove("active");
+              document.body.classList.remove("no-scroll");
+            }
+          }
+        });
+
+        // Sticky navbar on scroll
+        window.addEventListener("scroll", function () {
+          const navbar = document.querySelector(".navbar");
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // Preloader
+        const loader = document.querySelector(".loader");
+        window.addEventListener("load", function () {
+          setTimeout(() => {
+            loader.classList.add("fade-out");
+          }, 1000);
+        });
+
+        // Back to top button
+        const backToTop = document.querySelector("#backToTop");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            backToTop.classList.add("active");
+          } else {
+            backToTop.classList.remove("active");
+          }
+        });
+
+        // Gallery Filter
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        filterBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterBtns.forEach((btn) => btn.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
+
+            const filter = btn.getAttribute("data-filter");
+
+            galleryItems.forEach((item) => {
+              if (
+                filter === "all" ||
+                item.getAttribute("data-category") === filter
+              ) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const closeBtn = document.getElementById("close-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+
+        let currentImageIndex = 0;
+        const images = Array.from(document.querySelectorAll(".gallery-img"));
+        const captions = Array.from(
+          document.querySelectorAll(".gallery-caption h3")
+        );
+        const descriptions = Array.from(
+          document.querySelectorAll(".gallery-caption p")
+        );
+
+        // Open lightbox
+        images.forEach((img, index) => {
+          img.addEventListener("click", () => {
+            currentImageIndex = index;
+            updateLightbox();
+            lightbox.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          });
+        });
+
+        // Close lightbox
+        closeBtn.addEventListener("click", () => {
+          lightbox.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+
+        // Previous image
+        prevBtn.addEventListener("click", () => {
+          currentImageIndex =
+            (currentImageIndex - 1 + images.length) % images.length;
+          updateLightbox();
+        });
+
+        // Next image
+        nextBtn.addEventListener("click", () => {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          updateLightbox();
+        });
+
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+          if (lightbox.style.display === "flex") {
+            if (e.key === "Escape") {
+              lightbox.style.display = "none";
+              document.body.style.overflow = "auto";
+            } else if (e.key === "ArrowLeft") {
+              currentImageIndex =
+                (currentImageIndex - 1 + images.length) % images.length;
+              updateLightbox();
+            } else if (e.key === "ArrowRight") {
+              currentImageIndex = (currentImageIndex + 1) % images.length;
+              updateLightbox();
+            }
+          }
+        });
+
+        // Update lightbox content
+        function updateLightbox() {
+          lightboxImg.src = images[currentImageIndex].src;
+          lightboxCaption.textContent =
+            captions[currentImageIndex].textContent +
+            " - " +
+            descriptions[currentImageIndex].textContent;
+        }
+
+        // Close lightbox when clicking outside image
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        });
+      });
+    </script>
+    <script>
+      const translations = {
+        en: {
+          home: "Home",
+          about: "About",
+          services: "Services",
+          images: "Images",
+          reservation: "Reservation",
+          process: "Process",
+          accreditation: "Accreditation",
+          contact: "Contact",
+          english: "English",
+          arabic: "عربي",
+          "Proficiency Test Questionnaire": "Proficiency Test Questionnaire",
+          "Company Name: *": "Company Name: *",
+          "Address: *": "Address: *",
+          "Phone: *": "Phone: *",
+          "Email Address: *": "Email Address: *",
+          "Contact Name: *": "Contact Name: *",
+          "1. Which type of proficiency test schemes do you need?":
+            "1. Which type of proficiency test schemes do you need?",
+          "Calibration of Temperature Sensor with Indicator":
+            "Calibration of Temperature Sensor with Indicator",
+          "Calibration of Data Logger (Temperature & Relative Humidity)":
+            "Calibration of Data Logger (Temperature & Relative Humidity)",
+          "Calibration of Temperature & Humidity Enclosure":
+            "Calibration of Temperature & Humidity Enclosure",
+          "Calibration of Temperature Enclosure":
+            "Calibration of Temperature Enclosure",
+          "Calibration of Dry block Calibrators":
+            "Calibration of Dry block Calibrators",
+          "Calibration of Temperature Indicator":
+            "Calibration of Temperature Indicator",
+          "Calibration of Infra-red Thermometer":
+            "Calibration of Infra-red Thermometer",
+          "Calibration of Digital Balances": "Calibration of Digital Balances",
+          "Calibration of Masses": "Calibration of Masses",
+          "Calibration of Piston Operated Micropipettes":
+            "Calibration of Piston Operated Micropipettes",
+          "Calibration of Pressure Gauges": "Calibration of Pressure Gauges",
+          "Calibration of Vacuum Pressure Gauges":
+            "Calibration of Vacuum Pressure Gauges",
+          "Calibration of Timers & Stop Watches":
+            "Calibration of Timers & Stop Watches",
+          "Calibration of Rotational Speed Devices":
+            "Calibration of Rotational Speed Devices",
+          "Calibration od Digital Caliber": "Calibration od Digital Caliber",
+          "Calibration of Digital Multimeter":
+            "Calibration of Digital Multimeter",
+          "Calibration of pH meters": "Calibration of pH meters",
+          "Testing of Ethanol": "Testing of Ethanol",
+          "Testing of Isopropyl Alcohol": "Testing of Isopropyl Alcohol",
+          "Testing of Aceton": "Testing of Aceton",
+          "Testing of Methylparaben": "Testing of Methylparaben",
+          "Determination of pH": "Determination of pH",
+          "Determination of Total Aerobic Count":
+            "Determination of Total Aerobic Count",
+          "Determination of E. coli": "Determination of E. coli",
+          "Determination of Coagulase Positive Staphylococci":
+            "Determination of Coagulase Positive Staphylococci",
+          "Detection of Salmonella Spp.": "Detection of Salmonella Spp.",
+          "Liquid Limit, Plastic Limit, and Plasticity Index of Soils":
+            "Liquid Limit, Plastic Limit, and Plasticity Index of Soils",
+          "Laboratory Compaction Characteristics of Soil Using Modified Effort":
+            "Laboratory Compaction Characteristics of Soil Using Modified Effort",
+          "Compressive Strength of Cylindrical Concrete Specimens":
+            "Compressive Strength of Cylindrical Concrete Specimens",
+          "Relative Density (Specific gravity) and absorption of fine aggregate":
+            "Relative Density (Specific gravity) and absorption of fine aggregate",
+          "Sieve analysis of Fine and Coarse Aggregates":
+            "Sieve analysis of Fine and Coarse Aggregates",
+          "Materials finer than 75-µm (No. 200) Sieve in Mineral Aggregates by Washing":
+            "Materials finer than 75-µm (No. 200) Sieve in Mineral Aggregates by Washing",
+          "Resistance to Degradation of Small-size Coarse aggregate by Abrasion and Impact in the Los Angeles Machine":
+            "Resistance to Degradation of Small-size Coarse aggregate by Abrasion and Impact in the Los Angeles Machine",
+          "Sand Equivalent Value of Soils and Fine Aggregate":
+            "Sand Equivalent Value of Soils and Fine Aggregate",
+          "Relative Density (Specific gravity) and absorption of Coarse aggregate":
+            "Relative Density (Specific gravity) and absorption of Coarse aggregate",
+          "Theoretical Maximum Specific Gravity and Density of Bituminous Paving Mixture":
+            "Theoretical Maximum Specific Gravity and Density of Bituminous Paving Mixture",
+          "2. How frequently would you intend to participate?":
+            "2. How frequently would you intend to participate?",
+          "Once a year": "Once a year",
+          "Twice a year": "Twice a year",
+          Other: "Other",
+          "I am not a robot": "I am not a robot",
+          Submit: "Submit",
+          "DEQAT AL-KAFAA": "DEQAT AL-KAFAA",
+          "Testing Quality. Trusting Results.":
+            "Testing Quality. Trusting Results.",
+          "Quick Links": "Quick Links",
+          Home: "Home",
+          "About Us": "About Us",
+          Services: "Services",
+          Images: "Images",
+          Reservation: "Reservation",
+          "Our Services": "Our Services",
+          "Civil Engineering Testing": "Civil Engineering Testing",
+          "Food Testing": "Food Testing",
+          "Cosmetics Testing": "Cosmetics Testing",
+          "Water Testing": "Water Testing",
+          "Calibration Services": "Calibration Services",
+          "Contact Info": "Contact Info",
+          "Riyadh, K.S.A": "Riyadh, K.S.A",
+          "info@deqat-pt.com": "info@deqat-pt.com",
+          "© 2025 Made by SoftCode. All Rights Reserved.":
+            "© 2025 Made by SoftCode. All Rights Reserved.",
+        },
+        ar: {
+          home: "الرئيسية",
+          about: "من نحن",
+          services: "خدماتنا",
+          images: "معرض الصور",
+          reservation: "الحجز",
+          process: "العمليات",
+          accreditation: "الاعتماد",
+          contact: "اتصل بنا",
+          english: "English",
+          arabic: "عربي",
+          "Proficiency Test Questionnaire": "استبيان اختبار الكفاءة",
+          "Company Name: *": "اسم الشركة: *",
+          "Address: *": "العنوان: *",
+          "Phone: *": "الهاتف: *",
+          "Email Address: *": "البريد الإلكتروني: *",
+          "Contact Name: *": "اسم المسؤول: *",
+          "1. Which type of proficiency test schemes do you need?":
+            "1. ما نوع برامج اختبار الكفاءة التي تحتاجها؟",
+          "Calibration of Temperature Sensor with Indicator":
+            "معايرة حساس درجة الحرارة مع المؤشر",
+          "Calibration of Data Logger (Temperature & Relative Humidity)":
+            "معايرة مسجل البيانات (درجة الحرارة والرطوبة النسبية)",
+          "Calibration of Temperature & Humidity Enclosure":
+            "معايرة حجرة درجة الحرارة والرطوبة",
+          "Calibration of Temperature Enclosure": "معايرة حجرة درجة الحرارة",
+          "Calibration of Dry block Calibrators":
+            "معايرة معايرات الكتلة الجافة",
+          "Calibration of Temperature Indicator": "معايرة مؤشر درجة الحرارة",
+          "Calibration of Infra-red Thermometer":
+            "معايرة مقياس الحرارة بالأشعة تحت الحمراء",
+          "Calibration of Digital Balances": "معايرة الموازين الرقمية",
+          "Calibration of Masses": "معايرة الأوزان",
+          "Calibration of Piston Operated Micropipettes":
+            "معايرة الميكروبيبيت العاملة بالمكبس",
+          "Calibration of Pressure Gauges": "معايرة مقاييس الضغط",
+          "Calibration of Vacuum Pressure Gauges": "معايرة مقاييس ضغط الفراغ",
+          "Calibration of Timers & Stop Watches":
+            "معايرة المؤقتات وساعات التوقيف",
+          "Calibration of Rotational Speed Devices":
+            "معايرة أجهزة السرعة الدورانية",
+          "Calibration od Digital Caliber": "معايرة الكالبر الرقمي",
+          "Calibration of Digital Multimeter": "معايرة الملتيميتر الرقمي",
+          "Calibration of pH meters": "معايرة أجهزة قياس الأس الهيدروجيني",
+          "Testing of Ethanol": "اختبار الإيثانول",
+          "Testing of Isopropyl Alcohol": "اختبار الأيزوبروبيل الكحول",
+          "Testing of Aceton": "اختبار الأسيتون",
+          "Testing of Methylparaben": "اختبار الميثيل بارابين",
+          "Determination of pH": "تحديد درجة الحموضة",
+          "Determination of Total Aerobic Count": "تحديد العدد الكلي للهوائيات",
+          "Determination of E. coli": "تحديد الإشريكية القولونية",
+          "Determination of Coagulase Positive Staphylococci":
+            "تحديد المكورات العنقودية الإيجابية للتجلط",
+          "Detection of Salmonella Spp.": "كشف السالمونيلا",
+          "Liquid Limit, Plastic Limit, and Plasticity Index of Soils":
+            "حد السيولة، حد اللدونة، ودليل اللدونة للتربة",
+          "Laboratory Compaction Characteristics of Soil Using Modified Effort":
+            "خصائص دك التربة في المختبر باستخدام الجهد المعدل",
+          "Compressive Strength of Cylindrical Concrete Specimens":
+            "قوة الضغط لعينات الخرسانة الأسطوانية",
+          "Relative Density (Specific gravity) and absorption of fine aggregate":
+            "الكثافة النسبية (الثقل النوعي) وامتصاص الركام الناعم",
+          "Sieve analysis of Fine and Coarse Aggregates":
+            "تحليل المناخل للركام الناعم والخشن",
+          "Materials finer than 75-µm (No. 200) Sieve in Mineral Aggregates by Washing":
+            "المواد الأصغر من منخل 75 ميكرون (رقم 200) في الركام المعدني بالغسل",
+          "Resistance to Degradation of Small-size Coarse aggregate by Abrasion and Impact in the Los Angeles Machine":
+            "مقاومة التفتت للركام الخشن صغير الحجم بالاحتكاك والصدم في جهاز لوس أنجلوس",
+          "Sand Equivalent Value of Soils and Fine Aggregate":
+            "قيمة المكافئ الرملي للتربة والركام الناعم",
+          "Relative Density (Specific gravity) and absorption of Coarse aggregate":
+            "الكثافة النسبية (الثقل النوعي) وامتصاص الركام الخشن",
+          "Theoretical Maximum Specific Gravity and Density of Bituminous Paving Mixture":
+            "الوزن النوعي النظري الأقصى وكثافة خليط الأسفلت",
+          "2. How frequently would you intend to participate?":
+            "2. كم مرة تنوي المشاركة؟",
+          "Once a year": "مرة واحدة سنوياً",
+          "Twice a year": "مرتين سنوياً",
+          Other: "أخرى",
+          "I am not a robot": "أنا لست روبوت",
+          Submit: "إرسال",
+          "DEQAT AL-KAFAA": "دقة الكفاءة",
+          "Testing Quality. Trusting Results.":
+            "جودة الاختبار. ثقة في النتائج.",
+          "Quick Links": "روابط سريعة",
+          Home: "الرئيسية",
+          "About Us": "من نحن",
+          Services: "خدماتنا",
+          Images: "معرض الصور",
+          Reservation: "الحجز",
+          "Our Services": "خدماتنا",
+          "Civil Engineering Testing": "اختبارات الهندسة المدنية",
+          "Food Testing": "اختبار الغذاء",
+          "Cosmetics Testing": "اختبار مستحضرات التجميل",
+          "Water Testing": "اختبار المياه",
+          "Calibration Services": "خدمات المعايرة",
+          "Contact Info": "معلومات الاتصال",
+          "Riyadh, K.S.A": "الرياض، المملكة العربية السعودية",
+          "info@deqat-pt.com": "info@deqat-pt.com",
+          "© 2025 Made by SoftCode. All Rights Reserved.":
+            "© 2025 صنع بواسطة سوفت كود. جميع الحقوق محفوظة.",
+        },
+      };
+
+      function setLanguage(lang) {
+        // تغيير اتجاه الصفحة
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+        // تغيير النصوص
+        const elements = document.querySelectorAll("[data-translate]");
+        elements.forEach((el) => {
+          const key = el.getAttribute("data-translate");
+          if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+          }
+        });
+
+        // تغيير ملف CSS إذا كان لديك ملفات منفصلة للغة العربية
+        const styleLink = document.getElementById("language-style");
+        if (styleLink) {
+          styleLink.href = lang === "ar" ? "style-ar.css" : "style-en.css";
+        }
+
+        // حفظ اللغة المفضلة في localStorage
+        localStorage.setItem("preferredLanguage", lang);
+      }
+
+      // تحميل اللغة المفضلة عند تحميل الصفحة
+      document.addEventListener("DOMContentLoaded", function () {
+        const preferredLanguage =
+          localStorage.getItem("preferredLanguage") || "en";
+        setLanguage(preferredLanguage);
+      });
+      // اللغة الافتراضية
+    </script>
+  </body>
+</html>

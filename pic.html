@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEQAT AL-KAFAA | معرض الصور</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&family=Tajawal:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link id="language-style" rel="stylesheet" href="style-en.css" />
+    <style>
+      /* Gallery Specific Styles */
+      .gallery-section {
+        padding: 80px 0;
+        background-color: #f9f9f9;
+      }
+      
+      .gallery-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      
+      .section-header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      
+      .section-header h2 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-weight: 700;
+      }
+      
+      .section-header p {
+        font-size: 1.1rem;
+        color: #7f8c8d;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      .gallery-filter {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+      }
+      
+      .filter-btn {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 8px 20px;
+        margin: 5px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+      }
+      
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #3498db;
+        color: #fff;
+        border-color: #3498db;
+      }
+      
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+      
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      
+      .gallery-item:hover {
+        transform: translateY(-5px);
+      }
+      
+      .gallery-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      
+      .gallery-item:hover .gallery-img {
+        transform: scale(1.05);
+      }
+      
+      .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        padding: 15px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+      
+      .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+      }
+      
+      .gallery-caption h3 {
+        margin: 0 0 5px;
+        font-size: 1.1rem;
+      }
+      
+      .gallery-caption p {
+        margin: 0;
+        font-size: 0.9rem;
+        opacity: 0.9;
+      }
+      
+      /* Lightbox Styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+      }
+      
+      .lightbox-img {
+        max-width: 100%;
+        max-height: 80vh;
+        display: block;
+        margin: 0 auto;
+        border-radius: 5px;
+      }
+      
+      .lightbox-caption {
+        color: #fff;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 1.2rem;
+      }
+      
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+      }
+      
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+      
+      .prev-btn {
+        left: 20px;
+      }
+      
+      .next-btn {
+        right: 20px;
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+        
+        .section-header h2 {
+          font-size: 2rem;
+        }
+        
+        .section-header p {
+          font-size: 1rem;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        
+        .filter-btn {
+          padding: 6px 15px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Animation -->
+    <div class="loader">
+      <div class="loader-inner">
+        <div class="loader-circle"></div>
+        <div class="loader-text">DEQAT AL-KAFAA</div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="DEQAT AL-KAFAA Logo" />
+        </a>
+
+        <ul class="nav-menu">
+          <li>
+            <a href="index.html#home" class="nav-link" data-translate="home">Home</a>
+          </li>
+          <li>
+            <a href="index.html#about" class="nav-link" data-translate="about">About</a>
+          </li>
+          <li>
+            <a href="index.html#services" class="nav-link" data-translate="services">Services</a>
+          </li>
+          <li>
+            <a href="pic.html" class="nav-link active" data-translate="images">images</a>
+          </li>
+          <li>
+            <a href="index.html#process" class="nav-link" data-translate="process">Process</a>
+          </li>
+          <li>
+            <a href="index.html#accreditation" class="nav-link" data-translate="accreditation">Accreditation</a>
+          </li>
+          <li>
+            <a href="index.html#contact" class="nav-link" data-translate="contact">Contact</a>
+          </li>
+          <li>
+            <a href="form.html" class="nav-link" data-translate="reservation"
+              >Reservation</a
+            >
+          </li>
+        </ul>
+        <div class="lang-switcher">
+          <button onclick="setLanguage('en')" data-translate="english">English</button>
+          <button onclick="setLanguage('ar')" data-translate="arabic">عربي</button>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" style="margin-top: 3rem;">
+      <div class="gallery-container">
+        <div class="section-header">
+          <h2 data-translate="Our Gallery">Our Gallery</h2>
+          <p data-translate="Explore our work and facilities through these images">
+            Explore our work and facilities through these images
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Image 1 -->
+          <div class="gallery-item" data-category="lab">
+            <img src="images/b/0c110ed7-a9da-440a-b1e0-5a79c9f62c1a.jpeg" alt="Laboratory Equipment" class="gallery-img">
+
+          </div>
+
+          <!-- Image 2 -->
+          <div class="gallery-item" data-category="equipment">
+            <img src="images/b/195d8ddf-f7a9-402a-8a96-1bb1fd76f59d.jpeg" alt="Testing Equipment" class="gallery-img">
+
+          </div>
+
+          <!-- Image 3 -->
+          <div class="gallery-item" data-category="team">
+            <img src="images/b/40d93cb2-50e6-4998-ab8e-911f6532653f.jpeg" alt="Team Meeting" class="gallery-img">
+
+          </div>
+
+          <!-- Image 4 -->
+          <div class="gallery-item" data-category="events">
+            <img src="images/b/66e36ae0-1cfc-4461-94be-9d19c712e005.jpeg" alt="Training Session" class="gallery-img">
+
+          </div>
+
+
+
+          <!-- Image 6 -->
+          <div class="gallery-item" data-category="equipment">
+            <img src="images/b/97206a7f-0ca0-4104-a353-1ba2fbd46517.jpeg" alt="Calibration Process" class="gallery-img">
+
+          </div>
+
+          <!-- Image 7 -->
+          <div class="gallery-item" data-category="team">
+            <img src="images/b/a147260d-a652-48c3-ba46-4ecfd5ff427e.jpeg" alt="Quality Control" class="gallery-img">
+
+          </div>
+
+          <!-- Image 8 -->
+          <div class="gallery-item" data-category="events">
+            <img src="images/Determination of Aceton in cosmetic sample Lab 1.pdf.png" alt="Industry Conference" class="gallery-img">
+
+          </div>
+                    <!-- Image 9 -->
+                    <div class="gallery-item" data-category="events">
+                        <img src="images/b/f6bd6131-4773-48c4-aa4a-b42c5cf85e3b.jpeg" alt="Industry Conference" class="gallery-img">
+
+                      </div>
+                                <!-- Image 10 -->
+          <div class="gallery-item" data-category="events">
+            <img src="images/b/WhatsApp Image 2025-06-28 at 11.18.52 AM.jpeg" alt="Industry Conference" class="gallery-img">
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <span class="close-btn" id="close-btn">&times;</span>
+      <span class="nav-btn prev-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></span>
+      <span class="nav-btn next-btn" id="next-btn"><i class="fas fa-chevron-right"></i></span>
+      <div class="lightbox-content">
+        <img src="" alt="" class="lightbox-img" id="lightbox-img">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              style="width: 8rem; height: 6rem"
+              src="images/logo-preview.png"
+              alt="DEQAT AL-KAFAA"
+              data-translate="DEQAT AL-KAFAA"
+            />
+            <p data-translate="Testing Quality. Trusting Results.">
+              Testing Quality. Trusting Results.
+            </p>
+          </div>
+          <div class="footer-links">
+            <h3 data-translate="Quick Links">Quick Links</h3>
+            <ul>
+              <li><a href="index.html#home" data-translate="Home">Home</a></li>
+              <li><a href="index.html#about" data-translate="About Us">About Us</a></li>
+              <li>
+                <a href="index.html#services" data-translate="Services">Services</a>
+              </li>
+              <li>
+                <a href="index.html#process" data-translate="PT Process">PT Process</a>
+              </li>
+              <li>
+                <a href="index.html#accreditation" data-translate="Accreditation"
+                  >Accreditation</a
+                >
+              </li>
+              <li><a href="index.html#contact" data-translate="Contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-services">
+            <h3 data-translate="Our Services">Our Services</h3>
+            <ul>
+              <li>
+                <a href="index.html#services" data-translate="Civil Engineering Testing"
+                  >Civil Engineering Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Food Testing"
+                  >Food Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Cosmetics Testing"
+                  >Cosmetics Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Water Testing"
+                  >Water Testing</a
+                >
+              </li>
+              <li>
+                <a href="index.html#services" data-translate="Calibration Services"
+                  >Calibration Services</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h3 data-translate="Contact Info">Contact Info</h3>
+            <ul>
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                <span data-translate="Riyadh, K.S.A">Riyadh, K.S.A</span>
+              </li>
+              <li>
+                <i class="fas fa-phone-alt"></i>
+                <span data-translate="+966 535 935 824">+966 535 935 824</span>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <span data-translate="info@deqat-pt.com"
+                  >info@deqat-pt.com</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <a href="https://softcodedevelop.com/" target="_blank">
+            <p data-translate="© 2025 Made by SoftCode. All Rights Reserved.">
+              &copy; 2025 Made by
+              <span style="color: #ff00cf; font-size: large"
+                ><b>SoftCode</b></span
+              >. All Rights Reserved.
+            </p></a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      // Mobile Menu Toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navMenu = document.querySelector(".nav-menu");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        // Toggle menu when clicking on the hamburger icon
+        menuToggle.addEventListener("click", function () {
+          this.classList.toggle("active");
+          navMenu.classList.toggle("active");
+          document.body.classList.toggle("no-scroll");
+        });
+
+        // Close menu when clicking on a nav link
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            if (window.innerWidth <= 768) {
+              menuToggle.classList.remove("active");
+              navMenu.classList.remove("active");
+              document.body.classList.remove("no-scroll");
+            }
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!navMenu.contains(e.target)) {
+            if (e.target !== menuToggle && !menuToggle.contains(e.target)) {
+              menuToggle.classList.remove("active");
+              navMenu.classList.remove("active");
+              document.body.classList.remove("no-scroll");
+            }
+          }
+        });
+
+        // Sticky navbar on scroll
+        window.addEventListener("scroll", function () {
+          const navbar = document.querySelector(".navbar");
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // Preloader
+        const loader = document.querySelector(".loader");
+        window.addEventListener("load", function () {
+          setTimeout(() => {
+            loader.classList.add("fade-out");
+          }, 1000);
+        });
+
+        // Back to top button
+        const backToTop = document.querySelector("#backToTop");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            backToTop.classList.add("active");
+          } else {
+            backToTop.classList.remove("active");
+          }
+        });
+
+        // Gallery Filter
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        filterBtns.forEach(btn => {
+          btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(btn => btn.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
+            
+            const filter = btn.getAttribute("data-filter");
+            
+            galleryItems.forEach(item => {
+              if (filter === "all" || item.getAttribute("data-category") === filter) {
+                item.style.display = "block";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const lightboxCaption = document.getElementById("lightbox-caption");
+        const closeBtn = document.getElementById("close-btn");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        
+        let currentImageIndex = 0;
+        const images = Array.from(document.querySelectorAll(".gallery-img"));
+        const captions = Array.from(document.querySelectorAll(".gallery-caption h3"));
+        const descriptions = Array.from(document.querySelectorAll(".gallery-caption p"));
+        
+        // Open lightbox
+        images.forEach((img, index) => {
+          img.addEventListener("click", () => {
+            currentImageIndex = index;
+            updateLightbox();
+            lightbox.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          });
+        });
+        
+        // Close lightbox
+        closeBtn.addEventListener("click", () => {
+          lightbox.style.display = "none";
+          document.body.style.overflow = "auto";
+        });
+        
+        // Previous image
+        prevBtn.addEventListener("click", () => {
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          updateLightbox();
+        });
+        
+        // Next image
+        nextBtn.addEventListener("click", () => {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          updateLightbox();
+        });
+        
+        // Keyboard navigation
+        document.addEventListener("keydown", (e) => {
+          if (lightbox.style.display === "flex") {
+            if (e.key === "Escape") {
+              lightbox.style.display = "none";
+              document.body.style.overflow = "auto";
+            } else if (e.key === "ArrowLeft") {
+              currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+              updateLightbox();
+            } else if (e.key === "ArrowRight") {
+              currentImageIndex = (currentImageIndex + 1) % images.length;
+              updateLightbox();
+            }
+          }
+        });
+        
+        // Update lightbox content
+        function updateLightbox() {
+          lightboxImg.src = images[currentImageIndex].src;
+          lightboxCaption.textContent = captions[currentImageIndex].textContent + " - " + 
+                                        descriptions[currentImageIndex].textContent;
+        }
+        
+        // Close lightbox when clicking outside image
+        lightbox.addEventListener("click", (e) => {
+          if (e.target === lightbox) {
+            lightbox.style.display = "none";
+            document.body.style.overflow = "auto";
+          }
+        });
+      });
+
+     
+    </script>
+    <script>
+        const translations = {
+          en: {
+            home: "Home",
+            about: "About",
+            services: "Services",
+            images: "Images",
+            process: "Process",
+            accreditation: "Accreditation",
+            contact: "Contact",
+            reservation: "Reservation",
+            heroTitle: "DEQAT AL-KAFAA",
+            heroSubtitle: "FOR PROFICIENCY TESTING SERVICES",
+            heroTagline: "( Testing Quality - Trusting Results )",
+            enrollNow: "Enroll Now",
+            ourServices: "Our Services",
+            "about-title": "ABOUT DEQAT AL-KAFAA",
+            "about-subtitle":
+              "Elevating Laboratory Performance Through Robust Quality Assessment",
+            "about-who": "Who We Are",
+            "about-description": `DEQAT AL-KAFAA Is A Specialized Provider Of Accredited Proficiency Testing (PT) Schemes Designed To Support Laboratories And Institutions In Improving The Accuracy And Reliability Of Their Test Results. Our Programs Are Conducted In Compliance With ISO/IEC 17043:2023, Ensuring The Highest Standards Of Quality And Integrity.`,
+            "stat-labs": "Laboratories Served",
+            "stat-programs": "PT Programs",
+            "stat-established": "Established",
+            "services-title": "Our Services",
+            "services-subtitle":
+              "Comprehensive Proficiency Testing Solutions For Your Laboratory Needs",
+            "tab-testing": "Testing Fields",
+            "tab-calibration": "Calibration Fields",
+            "civil-title": "Civil Engineering",
+            "civil-desc":
+              "Asphalt, Soil, And Aggregate Testing For Construction Laboratories",
+           "food-title": "Food Testing",
+  "food-desc": "Microbiological And Chemical Analysis For Food Safety",
+  
+  "cosmetics-title": "Cosmetics",
+  "cosmetics-desc": "Analysis Of Cosmetic Products Including Determination Of Acetone",
+  
+  "water-title": "Water Testing",
+  "water-desc": "Comprehensive Water Quality Analysis Programs",
+  
+  "temp-title": "Temperature & Humidity",
+  "temp-desc": "Calibration Of Thermometers And Temperature Measurement Devices",
+  
+  "mass-title": "Mass (Weights)",
+  "mass-desc": "Calibration Of Balances And Weight Measurement Systems",
+  
+  "electrical-title": "Electrical",
+  "electrical-desc": "Calibration Of Electrical Measurement Equipment",
+  
+  "pressure-title": "Pressure & Vacuum",
+  "pressure-desc": "Calibration Of Pressure Gauges And Measurement Systems",
+  
+  "time-title": "Time RPM",
+  "time-desc": "Calibration Of Time Measurement Devices And RPM Counters",
+  
+  "volume-title": "Volume",
+  "volume-desc": "Calibration Of Volumetric Measurement Equipment And Containers",
+  
+  "ph-title": "Chemical (PH)",
+  "ph-desc": "Calibration Of PH Meters And Chemical Analysis Equipment",
+  
+  "enroll-btn": "Enroll Now",
+  
+  "process-title": "Our PT Process",
+  "process-subtitle": "Simple Steps To Ensure Your Laboratory's Excellence",
+  
+  "process-step1-title": "Registration",
+  "process-step1-desc": "Choose Your PT Scheme From Our Comprehensive Catalog",
+  
+  "process-step2-title": "Sample Distribution",
+  "process-step2-desc": "We Ship The Test Samples/Artifacts To Your Laboratory",
+  
+  "process-step3-title": "Testing",
+  "process-step3-desc": "Analyze The Sample Or Calibrate The Artifact In Your Lab",
+  
+  "process-step4-title": "Submission",
+  "process-step4-desc": "Report Your Results Through Our Secure Online Portal",
+  
+  "process-step5-title": "Evaluation",
+  "process-step5-desc": "Receive A Detailed Statistical Performance Report",
+  
+  "process-step6-title": "Feedback & Support",
+  "process-step6-desc": "Our Expert Team Provides Guidance For Improvement",
+  
+  "accreditation-title": "Accreditations & Standards",
+  "accreditation-subtitle": "Our Commitment To Quality And International Standards",
+  
+  "iso-compliance": "ISO/IEC 17043:2023 Compliant",
+  
+  "iso-desc1": "Our PT Schemes Are Designed And Implemented In Accordance With The International Standard For Proficiency Testing Providers. We Also Align With Related Standards Including:",
+  
+  "iso-17025": "ISO/IEC 17025:2017",
+  "iso-15189": "ISO 15189:2022",
+  "iso-industry": "Industry-Specific Regulations",
+  
+  "iso-desc2": "Participation In Our Programs Helps Laboratories Meet Their Accreditation Requirements And Demonstrate Technical Competence.",
+  
+  "benefits-title": "Benefits Of Proficiency Testing",
+  "benefits-subtitle": "Why Your Laboratory Should Participate In PT Programs",
+  
+  "benefit1-title": "Demonstrate Competence",
+  "benefit1-desc": "Show Technical Capability To Clients, Auditors, And Accreditation Bodies",
+  
+  "benefit2-title": "Enhance Reputation",
+  "benefit2-desc": "Build Credibility And Trust In Your Laboratory's Services",
+  
+  "benefit3-title": "Identify Improvements",
+  "benefit3-desc": "Discover Strengths And Areas Needing Attention In Your Processes",
+  
+  "benefit4-title": "Staff Training",
+  "benefit4-desc": "Use Results For Targeted Training And Continuous Improvement",
+  
+  "benefit5-title": "Meet Requirements",
+  "benefit5-desc": "Fulfill Accreditation Requirements For ISO/IEC 17025:2017 And ISO 15189:2022",
+  
+  "benefit6-title": "Documented Evidence",
+  "benefit6-desc": "Provide Proof Of Quality Assurance Activities For Audits",
+  
+  "What Our Clients Say": "What Our Clients Say",
+  "Trusted by laboratories across industries": "Trusted By Laboratories Across Industries",
+  
+  "DEQAT AL-KAFAA's proficiency testing program helped us identify calibration issues we weren't aware of. Their detailed reports and support were invaluable for our ISO 17025 accreditation.":  
+  "DEQAT AL-KAFAA's Proficiency Testing Program Helped Us Identify Calibration Issues We Weren't Aware Of. Their Detailed Reports And Support Were Invaluable For Our ISO 17025 Accreditation.",
+  
+  "Dr. Ahmed Al-Mansour": "Dr. Ahmed Al-Mansour",
+  "Quality Manager, Riyadh Testing Labs": "Quality Manager, Riyadh Testing Labs",
+  
+  "The cosmetic sample testing program provided clear benchmarks for our analytical methods. We've improved our processes significantly based on their feedback.":
+  "The Cosmetic Sample Testing Program Provided Clear Benchmarks For Our Analytical Methods. We've Improved Our Processes Significantly Based On Their Feedback.",
+  
+  "Eng. Sara Abdullah": "Eng. Sara Abdullah",
+  "Lab Director, Cosmetic Analysis Center": "Lab Director, Cosmetic Analysis Center",
+  
+  "Their water testing proficiency scheme helped us validate our new equipment. The turnaround time and report quality exceeded our expectations.":
+  "Their Water Testing Proficiency Scheme Helped Us Validate Our New Equipment. The Turnaround Time And Report Quality Exceeded Our Expectations.",
+  
+  "Dr. Mohammed Ali": "Dr. Mohammed Ali",
+  "Chief Chemist, National Water Co.": "Chief Chemist, National Water Co.",
+  
+  "The food microbiology PT program identified gaps in our lab procedures we had missed. Their corrective action recommendations were spot on.":
+  "The Food Microbiology PT Program Identified Gaps In Our Lab Procedures We Had Missed. Their Corrective Action Recommendations Were Spot On.",
+  
+  "Ms. Fatima Rahman": "Ms. Fatima Rahman",
+  "Microbiology Supervisor, FoodSafe Labs": "Microbiology Supervisor, FoodSafe Labs",
+  
+  "We participate in their construction materials testing program quarterly. The statistical analysis helps us maintain our accreditation with confidence.":
+  "We Participate In Their Construction Materials Testing Program Quarterly. The Statistical Analysis Helps Us Maintain Our Accreditation With Confidence.",
+  
+  "Eng. Khalid Omar": "Eng. Khalid Omar",
+  "Materials Testing Manager, BuildRight Co.": "Materials Testing Manager, BuildRight Co.",
+  
+  "Their electrical calibration proficiency testing helped us discover an instrument drift before it affected our production quality. Highly recommended!":
+  "Their Electrical Calibration Proficiency Testing Helped Us Discover An Instrument Drift Before It Affected Our Production Quality. Highly Recommended!",
+  
+  "Eng. Yasmin Farid": "Eng. Yasmin Farid",
+  "Calibration Engineer, ElectroTech": "Calibration Engineer, ElectroTech",
+  
+  "The pharmaceutical testing program provided exactly what we needed for FDA compliance. Their team understands regulatory requirements perfectly.":
+  "The Pharmaceutical Testing Program Provided Exactly What We Needed For FDA Compliance. Their Team Understands Regulatory Requirements Perfectly.",
+  
+  "Dr. Leila Hassan": "Dr. Leila Hassan",
+  "QA Director, PharmaCare Labs": "QA Director, PharmaCare Labs",
+  
+  "We've used several PT providers, but DEQAT AL-KAFAA's temperature calibration program stands out for its realistic challenges and clear reporting.":
+  "We've Used Several PT Providers, But DEQAT AL-KAFAA's Temperature Calibration Program Stands Out For Its Realistic Challenges And Clear Reporting.",
+  
+  "Eng. Sami Ibrahim": "Eng. Sami Ibrahim",
+  "Metrology Supervisor, ClimateControl Inc.": "Metrology Supervisor, ClimateControl Inc.",
+  
+  "Their customer support team is exceptional. They helped us interpret results and implement improvements that raised our lab's performance metrics.":
+  "Their Customer Support Team Is Exceptional. They Helped Us Interpret Results And Implement Improvements That Raised Our Lab's Performance Metrics.",
+  
+  "Ms. Noura Abdullah": "Ms. Noura Abdullah",
+  "Technical Director, BioAnalysis Labs": "Technical Director, BioAnalysis Labs",
+  
+  "Contact Us": "Contact Us",
+  "Get in touch to enroll in our next PT round": "Get In Touch To Enroll In Our Next PT Round",
+            Address: "Address",
+            "7822 Rajiah-Al Yarmuk Unit No.8\nRiyadh-13243-3164, K.S.A":
+              "7822 Rajiah-Al Yarmuk Unit No.8\nRiyadh-13243-3164, K.S.A",
+            Phone: "Phone",
+            "+966 535 935 824": "+966 535 935 824",
+            Email: "Email",
+            "info@deqat-pt.com": "info@deqat-pt.com",
+            Website: "Website",
+            "www.deqat-pt.com": "www.deqat-pt.com",
+            "Your Name": "Your Name",
+            "Email Address": "Email Address",
+            "Phone Number": "Phone Number",
+            "Service Interested In": "Service Interested In",
+            "Civil Engineering Testing": "Civil Engineering Testing",
+            "Food Testing": "Food Testing",
+            "Cosmetics Testing": "Cosmetics Testing",
+            "Water Testing": "Water Testing",
+            "Calibration Services": "Calibration Services",
+            "Other Enquiry": "Other Enquiry",
+            "Your Message": "Your Message",
+            "Send Message via WhatsApp": "Send Message via WhatsApp",
+            "DEQAT AL-KAFAA": "DEQAT AL-KAFAA",
+            "Testing Quality. Trusting Results.":
+              "Testing Quality. Trusting Results.",
+            "Quick Links": "Quick Links",
+            Home: "Home",
+            "About Us": "About Us",
+            Services: "Services",
+            images: "Images",
+            "PT Process": "PT Process",
+            Accreditation: "Accreditation",
+            Contact: "Contact",
+            "Our Services": "Our Services",
+            "Contact Info": "Contact Info",
+            "Riyadh, K.S.A": "Riyadh, K.S.A",
+            "Our Gallery": "Our Gallery",
+          "Explore our work and facilities through these images": "Explore our work and facilities through these images",
+          "All": "All",
+          "Laboratory": "Laboratory",
+          "Equipment": "Equipment",
+          "Team": "Team",
+          "Events": "Events",
+          "Modern Laboratory": "Modern Laboratory",
+          "Our state-of-the-art testing facility": "Our state-of-the-art testing facility",
+          "Precision Instruments": "Precision Instruments",
+          "High accuracy measurement devices": "High accuracy measurement devices",
+          "Expert Team": "Expert Team",
+          "Our qualified professionals at work": "Our qualified professionals at work",
+          "Training Workshop": "Training Workshop",
+          "Conducting professional development sessions": "Conducting professional development sessions",
+          "Chemical Analysis": "Chemical Analysis",
+          "Performing precise chemical tests": "Performing precise chemical tests",
+          "Calibration Process": "Calibration Process",
+          "Ensuring instrument accuracy": "Ensuring instrument accuracy",
+          "Quality Control": "Quality Control",
+          "Team reviewing test results": "Team reviewing test results",
+          "Industry Conference": "Industry Conference",
+          "Participating in international events": "Participating in international events"
+
+          },
+          ar: {
+            home: "الرئيسية",
+            about: "من نحن",
+            services: "خدماتنا",
+            images:"معرض الاعمال",
+            process: "العمليات",
+            accreditation: "الاعتماد",
+            contact: "اتصل بنا",
+            reservation: "احجز الآن",
+            heroTitle: "دقة الكفاءة لاختبارات الكفاءة الفنية",
+            heroSubtitle: "لخدمات اختبار الكفاءة",
+            heroTagline: "(جودة الاختبار - ثقة في النتائج)",
+            enrollNow: "سجل الآن",
+            ourServices: "خدماتنا",
+            "about-title": "حول دقة الكفاءة",
+            "about-subtitle": "رفع أداء المختبرات من خلال تقييم جودة قوي",
+            "about-who": "من نحن",
+            "about-description": `دقة الكفاءة هي جهة متخصصة في تقديم برامج اختبارات الكفاءة المعتمدة
+          لدعم المختبرات والمؤسسات في تحسين دقة وموثوقية نتائج اختباراتهم.
+          تجرى برامجنا وفقًا لمعيار ISO/IEC 17043.`,
+            "stat-labs": "عدد المختبرات",
+            "stat-programs": "برامج الكفاءة",
+            "stat-established": "سنة التأسيس",
+            "services-title": "خدماتنا",
+            "services-subtitle": "حلول شاملة للاختبار المهاري لمختبرك",
+            "tab-testing": "مجالات الاختبار",
+            "tab-calibration": "مجالات المعايرة",
+            "civil-title": "الهندسة المدنية",
+            "civil-desc": "اختبار الأسفلت والتربة والركام لمختبرات البناء",
+            "food-title": "اختبار الغذاء",
+            "food-desc": "التحليل الميكروبي والكيميائي لسلامة الغذاء",
+            "cosmetics-title": "مستحضرات التجميل",
+            "cosmetics-desc": "تحليل مستحضرات التجميل بما في ذلك تحديد الأسيتون",
+            "water-title": "اختبار المياه",
+            "water-desc": "برامج تحليل جودة المياه الشاملة",
+            "temp-title": "درجة الحرارة والرطوبة",
+            "temp-desc": "معايرة مقاييس الحرارة وأجهزة قياس درجة الحرارة",
+            "mass-title": "الكتلة (الأوزان)",
+            "mass-desc": "معايرة الموازين وأنظمة قياس الوزن",
+            "electrical-title": "الكهرباء",
+            "electrical-desc": "معايرة معدات القياس الكهربائية",
+            "pressure-title": "ضغط الفراغ",
+            "pressure-desc": "معايرة مقاييس الضغط وأنظمة القياس",
+            "time-title": "الوقت والدورات في الدقيقة",
+            "time-desc": "معايرة أجهزة قياس الوقت وعدادات الدورات في الدقيقة",
+            "volume-title": "الحجم",
+            "volume-desc": "معايرة معدات وأوعية القياس الحجمي",
+            "ph-title": "الكيمياء (الرقم الهيدروجيني)",
+            "ph-desc": "معايرة أجهزة قياس الرقم الهيدروجيني والمعدات الكيميائية",
+            "enroll-btn": "سجل الآن",
+            "process-title": "عملية اختبار المهارة لدينا",
+            "process-subtitle": "خطوات بسيطة لضمان تفوق مختبرك",
+            "process-step1-title": "التسجيل",
+            "process-step1-desc":
+              "اختر خطة اختبار المهارة من الكتالوج الشامل لدينا",
+            "process-step2-title": "توزيع العينات",
+            "process-step2-desc": "نقوم بشحن العينات/الأدوات لمختبرك",
+            "process-step3-title": "الاختبار",
+            "process-step3-desc": "قم بتحليل العينة أو معايرة الأداة في مختبرك",
+            "process-step4-title": "التقديم",
+            "process-step4-desc": "أرسل نتائجك عبر بوابتنا الإلكترونية الآمنة",
+            "process-step5-title": "التقييم",
+            "process-step5-desc": "استلم تقرير أداء إحصائي مفصل",
+            "process-step6-title": "التغذية الراجعة والدعم",
+            "process-step6-desc": "يقدم فريقنا الخبير الإرشاد لتحسين الأداء",
+            "accreditation-title": "الاعتمادات والمعايير",
+            "accreditation-subtitle": "التزامنا بالجودة والمعايير الدولية",
+            "iso-compliance": "مطابق لمعيار ISO/IEC 17043:2023",
+            "iso-desc1":
+              "تم تصميم وتنفيذ برامج اختبار المهارة لدينا وفقًا للمعيار الدولي لمزودي خدمات اختبار المهارة. كما نلتزم بالمعايير المتعلقة بما في ذلك:",
+            "iso-17025": "ISO/IEC 17025:2017",
+            "iso-15189": "ISO 15189:2022",
+            "iso-industry": "لوائح خاصة بالصناعة",
+            "iso-desc2":
+              "مشاركة المختبرات في برامجنا تساعد على تحقيق متطلبات الاعتماد وإثبات الكفاءة الفنية.",
+            "benefits-title": "فوائد اختبار المهارة",
+            "benefits-subtitle":
+              "لماذا يجب على مختبرك المشاركة في برامج اختبار المهارة",
+            "benefit1-title": "إظهار الكفاءة",
+            "benefit1-desc":
+              "إظهار القدرة الفنية للعملاء والمدققين وهيئات الاعتماد",
+            "benefit2-title": "تعزيز السمعة",
+            "benefit2-desc": "بناء المصداقية والثقة في خدمات مختبرك",
+            "benefit3-title": "تحديد التحسينات",
+            "benefit3-desc":
+              "اكتشاف نقاط القوة والمجالات التي تحتاج إلى اهتمام في عملياتك",
+            "benefit4-title": "تدريب الموظفين",
+            "benefit4-desc": "استخدام النتائج للتدريب المستهدف والتحسين المستمر",
+            "benefit5-title": "تلبية المتطلبات",
+            "benefit5-desc":
+              "الوفاء بمتطلبات الاعتماد لمعايير ISO/IEC 17025 و ISO 15189",
+            "benefit6-title": "الأدلة الموثقة",
+            "benefit6-desc": "توفير إثبات لأنشطة ضمان الجودة للمراجعات",
+            "What Our Clients Say": "ما يقوله عملاؤنا",
+            "Trusted by laboratories across industries":
+              "موثوق من قبل المختبرات في مختلف الصناعات",
+            "DEQAT AL-KAFAA's proficiency testing program helped us identify calibration issues we weren't aware of. Their detailed reports and support were invaluable for our ISO 17025 accreditation.":
+              "ساعدنا برنامج اختبار الكفاءة من دقة الكفاءة في اكتشاف مشاكل المعايرة التي لم نكن نعلم بها. كانت تقاريرهم التفصيلية ودعمهم لا يقدران بثمن لاعتمادنا على معيار ISO 17025.",
+            "Dr. Ahmed Al-Mansour": "د. أحمد المنصور",
+            "Quality Manager, Riyadh Testing Labs":
+              "مدير الجودة، مختبرات الرياض للاختبار",
+            "The cosmetic sample testing program provided clear benchmarks for our analytical methods. We've improved our processes significantly based on their feedback.":
+              "قدم برنامج اختبار عينات مستحضرات التجميل معايير واضحة لطرقنا التحليلية. لقد حسّنا عملياتنا بشكل كبير بناءً على ملاحظاتهم.",
+            "Eng. Sara Abdullah": "م. سارة عبدالله",
+            "Lab Director, Cosmetic Analysis Center":
+              "مدير المختبر، مركز تحليل مستحضرات التجميل",
+            "Their water testing proficiency scheme helped us validate our new equipment. The turnaround time and report quality exceeded our expectations.":
+              "ساعدنا برنامج اختبار كفاءة المياه في التحقق من صحة أجهزتنا الجديدة. تجاوزت جودة التقارير ومدة التنفيذ توقعاتنا.",
+            "Dr. Mohammed Ali": "د. محمد علي",
+            "Chief Chemist, National Water Co.":
+              "كيميائي رئيسي، الشركة الوطنية للمياه",
+            "The food microbiology PT program identified gaps in our lab procedures we had missed. Their corrective action recommendations were spot on.":
+              "حدد برنامج اختبار الكفاءة لميكروبيولوجيا الغذاء ثغرات في إجراءات المختبر التي فاتتنا. كانت توصياتهم للإجراءات التصحيحية دقيقة جداً.",
+            "Ms. Fatima Rahman": "السيدة فاطمة رحمن",
+            "Microbiology Supervisor, FoodSafe Labs":
+              "مشرفة الميكروبيولوجيا، مختبرات فودسيف",
+            "We participate in their construction materials testing program quarterly. The statistical analysis helps us maintain our accreditation with confidence.":
+              "نشارك في برنامج اختبار مواد البناء لديهم كل ربع سنة. تساعدنا التحليلات الإحصائية في الحفاظ على اعتمادنا بثقة.",
+            "Eng. Khalid Omar": "م. خالد عمر",
+            "Materials Testing Manager, BuildRight Co.":
+              "مدير اختبار المواد، شركة بيلدرایت",
+            "Their electrical calibration proficiency testing helped us discover an instrument drift before it affected our production quality. Highly recommended!":
+              "ساعدنا اختبار كفاءة المعايرة الكهربائية في اكتشاف انحراف في الأجهزة قبل أن يؤثر على جودة الإنتاج. نوصي به بشدة!",
+            "Eng. Yasmin Farid": "م. ياسمين فريد",
+            "Calibration Engineer, ElectroTech": "مهندسة معايرة، الكتروتيك",
+            "The pharmaceutical testing program provided exactly what we needed for FDA compliance. Their team understands regulatory requirements perfectly.":
+              "قدم برنامج اختبار الأدوية بالضبط ما نحتاجه للامتثال لمتطلبات إدارة الغذاء والدواء. فريقهم يفهم متطلبات التنظيم بشكل مثالي.",
+            "Dr. Leila Hassan": "د. ليلى حسن",
+            "QA Director, PharmaCare Labs": "مدير ضمان الجودة، مختبرات فارماكير",
+            "We've used several PT providers, but DEQAT AL-KAFAA's temperature calibration program stands out for its realistic challenges and clear reporting.":
+              "استخدمنا عدة مزودي خدمات اختبار كفاءة، لكن برنامج معايرة درجة الحرارة من دقة الكفاءة يبرز بتحدياته الواقعية وتقاريره الواضحة.",
+            "Eng. Sami Ibrahim": "م. سامي إبراهيم",
+            "Metrology Supervisor, ClimateControl Inc.":
+              "مشرف القياسات، شركة كلايمت كونترول",
+            "Their customer support team is exceptional. They helped us interpret results and implement improvements that raised our lab's performance metrics.":
+              "فريق دعم العملاء لديهم مميز للغاية. ساعدونا في تفسير النتائج وتنفيذ التحسينات التي رفعت مؤشرات أداء مختبرنا.",
+            "Ms. Noura Abdullah": "السيدة نورا عبدالله",
+            "Technical Director, BioAnalysis Labs":
+              "المديرة الفنية، مختبرات بيو أناليسيس",
+            "Contact Us": "اتصل بنا",
+            "Get in touch to enroll in our next PT round":
+              "تواصل معنا للتسجيل في جولة اختبار المهارة القادمة",
+            Address: "العنوان",
+            "7822 Rajiah-Al Yarmuk Unit No.8\nRiyadh-13243-3164, K.S.A":
+              "7822 راجح اليرموك الوحدة رقم 8\nالرياض-13243-3164، المملكة العربية السعودية",
+            Phone: "الهاتف",
+            "+966 535 935 824": "+966 535 935 824",
+            Email: "البريد الإلكتروني",
+            "info@deqat-pt.com": "info@deqat-pt.com",
+            Website: "الموقع الإلكتروني",
+            "www.deqat-pt.com": "www.deqat-pt.com",
+            "Your Name": "اسمك",
+            "Email Address": "البريد الإلكتروني",
+            "Phone Number": "رقم الهاتف",
+            "Service Interested In": "الخدمة المهتم بها",
+            "Civil Engineering Testing": "اختبار الهندسة المدنية",
+            "Food Testing": "اختبار الغذاء",
+            "Cosmetics Testing": "اختبار مستحضرات التجميل",
+            "Water Testing": "اختبار المياه",
+            "Calibration Services": "خدمات المعايرة",
+            "Other Enquiry": "استفسار آخر",
+            "Your Message": "رسالتك",
+            "Send Message via WhatsApp": "إرسال الرسالة عبر واتساب",
+            "DEQAT AL-KAFAA": "دقة الكفاءة",
+            "Testing Quality. Trusting Results.":
+              "جودة الاختبار. ثقة في النتائج.",
+            "Quick Links": "روابط سريعة",
+            Home: "الرئيسية",
+            "About Us": "من نحن",
+            Services: "خدماتنا",
+            images:"معرض الاعمال",
+            "PT Process": "عملية اختبار المهارة",
+            Accreditation: "الاعتماد",
+            Contact: "اتصل بنا",
+            "Our Services": "خدماتنا",
+            "Contact Info": "معلومات الاتصال",
+            "Riyadh, K.S.A": "الرياض، المملكة العربية السعودية",
+            "Our Gallery": "معرض الصور",
+          "Explore our work and facilities through these images": "استكشف أعمالنا ومرافقنا من خلال هذه الصور",
+          "All": "الكل",
+          "Laboratory": "المختبر",
+          "Equipment": "المعدات",
+          "Team": "الفريق",
+          "Events": "الفعاليات",
+          "Modern Laboratory": "مختبر حديث",
+          "Our state-of-the-art testing facility": "منشأة الاختبار المتطورة لدينا",
+          "Precision Instruments": "أدوات دقيقة",
+          "High accuracy measurement devices": "أجهزة قياس عالية الدقة",
+          "Expert Team": "فريق خبراء",
+          "Our qualified professionals at work": "متخصصون مؤهلون أثناء العمل",
+          "Training Workshop": "ورشة تدريبية",
+          "Conducting professional development sessions": "إجراء جلسات التطوير المهني",
+          "Chemical Analysis": "تحليل كيميائي",
+          "Performing precise chemical tests": "إجراء اختبارات كيميائية دقيقة",
+          "Calibration Process": "عملية المعايرة",
+          "Ensuring instrument accuracy": "ضمان دقة الأجهزة",
+          "Quality Control": "مراقبة الجودة",
+          "Team reviewing test results": "الفريق يراجع نتائج الاختبار",
+          "Industry Conference": "مؤتمر صناعي",
+          "Participating in international events": "المشاركة في الفعاليات الدولية"
+
+          },
+        };
+  
+        function setLanguage(lang) {
+          // تغيير اتجاه الصفحة
+          document.documentElement.lang = lang;
+          document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  
+          // تغيير النصوص
+          const elements = document.querySelectorAll("[data-translate]");
+          elements.forEach((el) => {
+            const key = el.getAttribute("data-translate");
+            if (translations[lang][key]) {
+              el.textContent = translations[lang][key];
+            }
+          });
+  
+          // تغيير ملف CSS إذا كان لديك ملفات منفصلة للغة العربية
+          const styleLink = document.getElementById("language-style");
+          if (styleLink) {
+            styleLink.href = lang === "ar" ? "style-ar.css" : "style-en.css";
+          }
+  
+          // حفظ اللغة المفضلة في localStorage
+          localStorage.setItem("preferredLanguage", lang);
+        }
+  
+        // تحميل اللغة المفضلة عند تحميل الصفحة
+        document.addEventListener("DOMContentLoaded", function () {
+          const preferredLanguage =
+            localStorage.getItem("preferredLanguage") || "en";
+          setLanguage(preferredLanguage);
+        });
+        // اللغة الافتراضية
+      </script>
+  </body>
+</html>
